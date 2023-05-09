@@ -36,19 +36,7 @@ outProj = pyproj.Proj(init='epsg:4326') # WGS 84
 buffer_polygon_4326 = shapely.ops.transform(lambda x, y: pyproj.transform(inProj, outProj, x, y), buffer_polygon)
 
 # extract all the toilets within the buffer zone
-toilets = ox.geometries.geometries_from_polygon(buffer_polygon_4326, tags={
-    'amenity': 'toilets',
-    'name': '*',
-    'operator': '*',
-    'opening_hours': '*',
-    'toilets:disposal': '*',
-    'toilets:access': '*',
-    'toilets:position': '*',
-    'fee': '*'
-})
-
-# print the number of toilets found
-print(f"Number of toilets found within the buffer zone: {len(toilets)}")
+toilets = ox.geometries.geometries_from_polygon(buffer_polygon_4326, tags={'amenity': 'toilets', 'toilets:accessibility': '*'})
 
 # extract the track points from the GPX file
 track_points = [(point.latitude, point.longitude) for point in gpx.tracks[0].segments[0].points]
