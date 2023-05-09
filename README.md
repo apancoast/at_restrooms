@@ -1,22 +1,4 @@
-<style>
-    /* Desktop map size */
-    #map {
-        width: 800px;
-        height: 600px;
-    }
-
-    /* Mobile map size */
-    @media (max-width: 768px) {
-        #map {
-            width: 100%;
-            height: 400px;
-        }
-    }
-</style>
-
-<div id="map">
-    <iframe src="https://nbviewer.org/github/apancoast/at_restrooms/blob/main/map.html" frameborder="0"></iframe>
-</div>
+<iframe src="https://nbviewer.org/github/apancoast/at_restrooms/blob/main/map.html" height="75%" width="100%"></iframe>
 
 # Description
 This repository contains Python code that reads a GPX file containing GPS coordinates of a track, creates a buffer zone around the track, and finds all the toilets within that buffer zone using OpenStreetMap data. It then visualizes the GPX track, buffer zone, and toilet locations on an interactive map using the Folium library.
