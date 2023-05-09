@@ -6,6 +6,7 @@ import osmnx as ox
 import geopandas as gpd
 import shapely
 import folium
+import pandas as pd
 
 # parse the GPX file
 with open('at_centerline_full.gpx', 'r') as gpx_file:
@@ -35,7 +36,16 @@ outProj = pyproj.Proj(init='epsg:4326') # WGS 84
 buffer_polygon_4326 = shapely.ops.transform(lambda x, y: pyproj.transform(inProj, outProj, x, y), buffer_polygon)
 
 # extract all the toilets within the buffer zone
-toilets = ox.geometries.geometries_from_polygon(buffer_polygon_4326, tags={'amenity': 'toilets'})
+toilets = ox.geometries.geometries_from_polygon(buffer_polygon_4326, tags={
+    'amenity': 'toilets',
+    'name': '*',
+    'operator': '*',
+    'opening_hours': '*',
+    'toilets:disposal': '*',
+    'toilets:access': '*',
+    'toilets:position': '*',
+    'fee': '*'
+})
 
 # print the number of toilets found
 print(f"Number of toilets found within the buffer zone: {len(toilets)}")
@@ -52,13 +62,31 @@ map_ = folium.Map(location=midpoint, zoom_start=12)
 # add the GPX track to the map as a blue line
 folium.PolyLine(locations=track_points, color='blue').add_to(map_)
 
-# add the toilets to the map as red dots
+# add the toilets to the map as red dots with tooltips
 for _, row in toilets.iterrows():
     location = row.geometry.centroid.coords[0][::-1]
-    folium.CircleMarker(location=location, radius=5, color='red', fill=True, fill_color='red').add_to(map_)
-
+    tooltip = f"<b>Coordinates:</b> {location}<br><br>Toilet information:<br>"
+    if not pd.isna(row['name']):
+        tooltip += f"<b>Name:</b> {row['name']}<br>"
+    if not pd.isna(row['operator']):
+        tooltip += f"<b>Operator:</b> {row['operator']}<br>"
+    if not pd.isna(row['opening_hours']):
+        tooltip += f"<b>Opening hours:</b> {row['opening_hours']}<br>"
+    if not pd.isna(row['toilets:disposal']):
+        tooltip += f"<b>Disposal:</b> {row['toilets:disposal']}<br>"
+    if not pd.isna(row['toilets:position']):
+        tooltip += f"<b>Position:</b> {row['toilets:position']}<br>"
+    if not pd.isna(row['fee']):
+        tooltip += f"<b>Fee:</b> {row['fee']}<br>"
+    if all(pd.isna(row[['name', 'operator', 'opening_hours', 'toilets:disposal', 'toilets:position', 'fee']])):
+        tooltip += "Unavailable<br>"
+    folium.Marker(location=location, tooltip=tooltip, icon=folium.Icon(color='red')).add_to(map_)
+    
 # add the buffer zone to the map as a transparent polygon
 folium.GeoJson(buffer_polygon_4326, style_function=lambda x: {'fillColor': 'transparent', 'color': 'green'}).add_to(map_)
 
 # display the map
 map_
+
+# save the map as an HTML file
+map_.save('map.html')

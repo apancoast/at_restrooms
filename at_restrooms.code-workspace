@@ -4,5 +4,8 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"audioCues.notebookCellCompleted": "on",
+		"audioCues.notebookCellFailed": "on"
+	}
 }
