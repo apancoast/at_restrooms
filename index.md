@@ -6,4 +6,4 @@ This map shows bathrooms within two miles of the Appalachian Trail using OpenStr
 ![Disposal Methods](https://github.com/apancoast/at_restrooms/blob/main/disposal_methods.png?raw=true)
 
 # Source
-[GitHub](https://github.com/apancoast/at_restrooms)
+Read more about the project and explore the code at the [GitHub repository](https://github.com/apancoast/at_restrooms).
