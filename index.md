@@ -3,7 +3,7 @@
 # Description
 This map shows bathrooms within two miles of the Appalachian Trail using OpenStreetMap data. Hover for bathroom details.
 
-![Disposal Methods](https://github.com/apancoast/at_restrooms/blob/main/disposal_methods.png?raw=true)
+<img src="(https://github.com/apancoast/at_restrooms/blob/main/disposal_methods.png?raw=true" alt="Disposal Methods" width="100">
 
 # Source
 Read more about the project and explore the code at the [GitHub repository](https://github.com/apancoast/at_restrooms).
