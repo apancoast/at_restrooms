@@ -13,4 +13,4 @@ Explore the map on the [GitHub Page](https://apancoast.github.io/at_restrooms/).
 # Sources
 GPX file source: [Gaia GPS](https://www.gaiagps.com/datasummary/folder/dedfe4c3-dc0e-496e-b505-c47f14548a52/?layer=GaiaTopoRasterFeet)  
 StackOverflow Q&A: [Retrieve Campsites Within a Specific Radius Around a GPX Route from OSM](https://stackoverflow.com/questions/75144426/retrieve-campsites-within-a-specific-radius-around-a-gpx-route-from-osm)  
-Code manipulated by [Poe](Poe.com), a GPT-3 based language model.
+Code manipulated assisted by [Poe](Poe.com), a GPT-3 based language model.
